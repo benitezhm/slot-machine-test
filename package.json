@@ -1,0 +1,15 @@
+{
+  "name": "slot-machine-test",
+  "version": "1.0.0",
+  "description": "A slot machine game for test",
+  "main": "index.html",
+  "scripts": {
+    "server": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "demo"
+  ],
+  "author": "Miguel Benitez <benitezhm@gmail.com>",
+  "license": "MIT"
+}
