@@ -17,11 +17,11 @@ var stopping = false;
 // create an array with the positions of the slots and the content
 // the positions start from bottom to top, because the movement of the slot is toward down
 var slotsPositions = {
-  0: "3bar",
-  484: "bar",
-  363: "2bar",
-  242: "seven",
-  121: "cherries"
+  120: "3bar",
+  0: "bar",
+  480: "2bar",
+  360: "seven",
+  240: "cherries"
 };
 
 function start() {
@@ -70,7 +70,6 @@ function finishMovement(el) {
   pos = parseInt(pos.split(" ")[1]);
 
   // getting the final position where its stop
-  // so image is vertically centered
   var relativePos = pos % 60;
   var finalPos = pos - relativePos + 60;
 
@@ -86,8 +85,16 @@ function finishMovement(el) {
       document.getElementById("start").disabled = false;
 
       // getting the exact position where the slot stops
-      posicion = finalPos - 605 * parseInt(finalPos / 605);
-      document.getElementById("res_" + el).innerHTML = slotsPositions[posicion];
+      var middlePosition = finalPos - 600 * parseInt(finalPos / 600);
+      var topPosition = middlePosition + 120;
+      var bottomPosition = middlePosition - 120;
+      var res =
+        slotsPositions[topPosition] +
+        " " +
+        slotsPositions[middlePosition] +
+        " " +
+        slotsPositions[bottomPosition];
+      document.getElementById("res_" + el).innerHTML = res;
     }
   }, 1);
 }
