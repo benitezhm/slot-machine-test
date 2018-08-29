@@ -22,7 +22,7 @@ function onRequest(request, response) {
         response.writeHead(200, {"Content-Type": "text/css"});
         fileStream.pipe(response);
     } else if (request.url.match("\.png$")) {
-        var imagePath = path.join(__dirname, 'public', request.url);
+        var imagePath = path.join(__dirname, request.url);
         var fileStream = fs.createReadStream(imagePath);
         response.writeHead(200, {"Content-Type": "image/png"});
         fileStream.pipe(response);
