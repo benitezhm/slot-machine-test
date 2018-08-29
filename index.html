@@ -12,6 +12,13 @@
             width: 141px;
         }
 
+        .balance {
+            width: 100px;
+            height: 26px;
+            margin-left: 20px;
+            border: 1px solid #aaa;
+        }
+
         .result {
             height: 26px;
             width: 131px;
@@ -22,11 +29,16 @@
         .container {
             display: flex;
             flex-wrap: wrap;
-            flex-grow: 2;
-            width: 523px;
+            width: 640px;
         }
 
-        .line {
+        div.reels {
+            display: flex;
+            flex-wrap: wrap;
+            /* flex-grow: 2; */
+            width: 560px;
+        }
+        div.line {
             width: 550px;
             height: 180px;
             border-bottom: 1px solid black;
@@ -48,15 +60,35 @@
 
 <body>
 
-    <div class="container line">
+    <div class="container">
+        <div class="reels">
+        <div class="line"></div>
         <div id="reel1" class="slot"></div>
         <div id="reel2" class="slot"></div>
         <div id="reel3" class="slot"></div>
+        <div class="balance"></div>
 
         <div id="res_reel1" class="result"></div>
         <div id="res_reel2" class="result"></div>
         <div id="res_reel3" class="result"></div>
         <button onclick="start()" id="start">Start</button>
+
+        <div id="" class="result">
+            <select id="reel1_sel">
+                <option value="3bar">3bar</option>
+                <option value="bar">bar</option>
+                <option value="2bar">2bar</option>
+                <option value="seven">seven</option>
+                <option value="cherries">cherries</option>
+            </select>
+            <select id="reel_pos">
+                <option value="top">top</option>
+                <option value="middle">middle</option>
+                <option value="bottom">bottom</option>
+            </select>
+        </div>
+    </div>
+        
 
         <table>
             <tr>
@@ -64,35 +96,35 @@
                 <th colspan="3">Symbol</th>
                 <th>Reward</th>
             </tr>
-            <tr>
+            <tr id="cherry_top">
                 <td>top</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>2000 $</td>
             </tr>
-            <tr>
+            <tr id="cherry_middle">
                 <td>middle</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>1000 $</td>
             </tr>
-            <tr>
+            <tr id="cherry_bottom">
                 <td>bottom</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>4000 $</td>
             </tr>
-            <tr>
+            <tr id="sevens">
                 <td>any</td>
                 <td>7</td>
                 <td>7</td>
                 <td>7</td>
                 <td>150 $</td>
             </tr>
-            <tr>
+            <tr id="any_any">
                 <td>any</td>
                 <td colspan="3">any combination of cherry and 7</td>
                 <td>75 $</td>

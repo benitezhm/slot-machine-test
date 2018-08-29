@@ -94,7 +94,9 @@ function finishMovement(el, count, vel) {
 
   // getting the final position where its stop
   var relativePos = pos % 60;
+  // validate here if the debug mode is on before determine the finalPos
   var finalPos = pos - relativePos + 60;
+  finalPos = getKeyByValue(slotsPositions, document.getElementById("reel1_sel").value);
 
   // interval of time until the slot is centered
   var interval2 = setInterval(function() {
@@ -114,6 +116,16 @@ function finishMovement(el, count, vel) {
       var middlePosition = finalPos - 600 * parseInt(finalPos / 600);
       var topPosition = middlePosition + 120;
       var bottomPosition = middlePosition == 0 ? 480 : middlePosition - 120;
+      var topLine = [];
+      var middleLine = [];
+      var bottomLine = [];
+      topLine.push(slotsPositions[topPosition]);
+      middleLine.push(slotsPositions[middlePosition]);
+      bottomLine.push(slotsPositions[bottomPosition]);
+      var balance = 0;
+      if (topLine.length === 3) {
+        balance = evaluateLine(topLine, "top");
+      }
       var res =
         slotsPositions[topPosition] +
         " " +
@@ -123,4 +135,37 @@ function finishMovement(el, count, vel) {
       document.getElementById("res_" + el).innerHTML = res;
     }
   }, 1);
+}
+
+function evaluateLine(line, linePositon) {
+  // function to evaluate if the line is winner
+  if (
+    linePositon === "top" &&
+    line[0] == "cherry" &&
+    line[1] == "cherry" &&
+    line[2] == "cherry"
+  ) {
+    document.getElementsByClassName("balance").innerHTML = balance + "$";
+    blink("cherry_top");
+  }
+}
+
+// utility function to get the key for the corresponding value
+function getKeyByValue(object, value) {
+  return Object.keys(object).find(key => object[key] === value);
+}
+
+// function to make text blinking
+function blink(el) {
+  var interval = setInterval(function() {
+    document.getElementById(el).style.webkitTransitionDuration = "0.7s";
+    document.getElementById(el).style.opacity = 0;
+    setTimeout(function() {
+      document.getElementById(el).style.webkitTransitionDuration = "0.7s";
+      document.getElementById(el).style.opacity = 1;
+    }, 700);
+  }, 1400);
+  setTimeout(function() {
+    clearInterval(interval);
+  }, 5600);
 }
