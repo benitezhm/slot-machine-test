@@ -1,12 +1,11 @@
 // initialize
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function() {
   // enable all options for debug
   document.getElementById("debug").addEventListener("change", function() {
     var dbgList = document.getElementsByClassName("debug");
     [].forEach.call(dbgList, function(item, index) {
       item.disabled = !document.getElementById("debug").checked;
-    })
-    
+    });
   });
 });
 
@@ -27,7 +26,7 @@ var bottomLine = [];
 var rules = [];
 
 // initialize balance
-var balance = 0;
+var balance = 10;
 
 // dict with amounts for every rule
 var rulesAmount = {
@@ -78,6 +77,12 @@ function start() {
   inc(vel2);
   inc(vel3);
   clearInterface();
+  if (balance <= 0) {
+    alert("You don't have engouth balance!");
+    return;
+  }
+  balance -= 1;
+  document.getElementById("balance").value = balance;
   var reels = document.getElementsByClassName("slot");
   var interval;
   var delayTime = 2000;
@@ -219,7 +224,9 @@ function evaluateLine(line, linePositon) {
     document.getElementById(item).style.backgroundColor = "red";
   });
   document.getElementById("balance").value = balance;
-  blink("balance");
+  if (rules.length > 0) {
+    blink("balance");
+  }
 }
 
 // utility function to get the key for the corresponding value
@@ -235,11 +242,11 @@ function blink(el) {
     setTimeout(function() {
       document.getElementById(el).style.webkitTransitionDuration = "0.7s";
       document.getElementById(el).style.opacity = 1;
-    }, 700);
-  }, 1400);
+    }, 500);
+  }, 1000);
   setTimeout(function() {
     clearInterval(interval);
-  }, 5600);
+  }, 4200);
 }
 
 function evaluateRules(line, pos) {
