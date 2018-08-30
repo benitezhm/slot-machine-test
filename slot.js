@@ -1,3 +1,15 @@
+// initialize
+document.addEventListener("DOMContentLoaded", function(){
+  // enable all options for debug
+  document.getElementById("debug").addEventListener("change", function() {
+    var dbgList = document.getElementsByClassName("debug");
+    [].forEach.call(dbgList, function(item, index) {
+      item.disabled = !document.getElementById("debug").checked;
+    })
+    
+  });
+});
+
 // position of the image
 var count1 = { value: 0 };
 var count2 = { value: 0 };
@@ -7,6 +19,28 @@ var count3 = { value: 0 };
 var vel1 = { value: 0 };
 var vel2 = { value: 0 };
 var vel3 = { value: 0 };
+
+// variables to evaluate the lines
+var topLine = [];
+var middleLine = [];
+var bottomLine = [];
+var rules = [];
+
+// initialize balance
+var balance = 0;
+
+// dict with amounts for every rule
+var rulesAmount = {
+  rule1: 2000,
+  rule2: 1000,
+  rule3: 4000,
+  rule4: 150,
+  rule5: 75,
+  rule6: 50,
+  rule7: 20,
+  rule8: 10,
+  rule9: 50
+};
 
 // helper function to increase the value of wrapper var
 function inc(x, i = 1) {
@@ -35,11 +69,15 @@ var slotsPositions = {
 
 function start() {
   // initialize values
+  topLine = [];
+  middleLine = [];
+  bottomLine = [];
+  rules = [];
   incr = 1;
   inc(vel1);
   inc(vel2);
   inc(vel3);
-  document.getElementById("start").disabled = true;
+  clearInterface();
   var reels = document.getElementsByClassName("slot");
   var interval;
   var delayTime = 2000;
@@ -94,9 +132,43 @@ function finishMovement(el, count, vel) {
 
   // getting the final position where its stop
   var relativePos = pos % 60;
-  // validate here if the debug mode is on before determine the finalPos
+  // determine the initial value for finalPos
   var finalPos = pos - relativePos + 60;
-  finalPos = getKeyByValue(slotsPositions, document.getElementById("reel1_sel").value);
+
+  // if the debug mode is on determmine in which position and slot the user wanted to test
+  if (document.getElementById("debug").checked) {
+    var rdbg = (pdbg = "");
+    switch (el) {
+      case "reel1":
+        rdbg = "reel_dbg1";
+        pdbg = "pos_dbg1";
+        break;
+      case "reel2":
+        rdbg = "reel_dbg2";
+        pdbg = "pos_dbg2";
+        break;
+      case "reel3":
+        rdbg = "reel_dbg3";
+        pdbg = "pos_dbg3";
+    }
+
+    // recalculate the final pos based on the user especifications
+    finalPos = parseInt(
+      getKeyByValue(slotsPositions, document.getElementById(rdbg).value)
+    );
+
+    // determine the position in where the seleted element should be
+    switch (document.getElementById(pdbg).value) {
+      case "top":
+        finalPos -= 120;
+        break;
+      case "bottom":
+        finalPos += 120;
+        break;
+      default:
+        finalPos;
+    }
+  }
 
   // interval of time until the slot is centered
   var interval2 = setInterval(function() {
@@ -107,25 +179,27 @@ function finishMovement(el, count, vel) {
       clearInterval(interval2);
       document.getElementById(el).style["background-position"] =
         "0% " + finalPos + "px";
-      // enable start button only if the last reel has stopped
-      if (el === "reel3") {
-        document.getElementById("start").disabled = false;
-      }
 
       // getting the exact position where the slot stops
       var middlePosition = finalPos - 600 * parseInt(finalPos / 600);
+      middlePosition = middlePosition < 0 ? 480 : middlePosition;
       var topPosition = middlePosition + 120;
       var bottomPosition = middlePosition == 0 ? 480 : middlePosition - 120;
-      var topLine = [];
-      var middleLine = [];
-      var bottomLine = [];
+      bottomPosition = bottomPosition < 0 ? 360 : bottomPosition;
       topLine.push(slotsPositions[topPosition]);
       middleLine.push(slotsPositions[middlePosition]);
       bottomLine.push(slotsPositions[bottomPosition]);
-      var balance = 0;
-      if (topLine.length === 3) {
-        balance = evaluateLine(topLine, "top");
+      if (el === "reel3") {
+        // evaluate every line to check the win combination
+        evaluateLine(topLine, "top");
+        evaluateLine(middleLine, "middle");
+        evaluateLine(bottomLine, "bottom");
+
+        // enable start button only if the last reel has stopped
+        document.getElementById("start").disabled = false;
+        document.getElementById("debug").disabled = false;
       }
+
       var res =
         slotsPositions[topPosition] +
         " " +
@@ -139,15 +213,13 @@ function finishMovement(el, count, vel) {
 
 function evaluateLine(line, linePositon) {
   // function to evaluate if the line is winner
-  if (
-    linePositon === "top" &&
-    line[0] == "cherry" &&
-    line[1] == "cherry" &&
-    line[2] == "cherry"
-  ) {
-    document.getElementsByClassName("balance").innerHTML = balance + "$";
-    blink("cherry_top");
-  }
+  evaluateRules(line, linePositon);
+  [].forEach.call(rules, function(item, index) {
+    balance += rulesAmount[item];
+    document.getElementById(item).style.backgroundColor = "red";
+  });
+  document.getElementById("balance").value = balance;
+  blink("balance");
 }
 
 // utility function to get the key for the corresponding value
@@ -168,4 +240,59 @@ function blink(el) {
   setTimeout(function() {
     clearInterval(interval);
   }, 5600);
+}
+
+function evaluateRules(line, pos) {
+  var bars = ["bar", "2bar", "3bar"];
+  var chse = ["cherries", "seven"];
+  pos == "top" &&
+  line[0] == "cherries" &&
+  line[1] == "cherries" &&
+  line[2] == "cherries"
+    ? rules.push("rule1")
+    : null; // rule1
+  pos == "middle" &&
+  line[0] == "cherries" &&
+  line[1] == "cherries" &&
+  line[2] == "cherries"
+    ? rules.push("rule2")
+    : null; // rule2
+  pos == "bottom" &&
+  line[0] == "cherries" &&
+  line[1] == "cherries" &&
+  line[2] == "cherries"
+    ? rules.push("rule3")
+    : null; // rule3
+  line[0] == "seven" && line[1] == "seven" && line[2] == "seven"
+    ? rules.push("rule4")
+    : null; // rule4
+  chse.indexOf(line[0]) >= 0 &&
+  chse.indexOf(line[1]) >= 0 &&
+  chse.indexOf(line[2]) >= 0
+    ? rules.push("rule5")
+    : null; // rule5
+  line[0] == "3bar" && line[1] == "3bar" && line[2] == "3bar"
+    ? rules.push("rule6")
+    : null; // rule6
+  line[0] == "2bar" && line[1] == "2bar" && line[2] == "2bar"
+    ? rules.push("rule7")
+    : null; // rule7
+  line[0] == "bar" && line[1] == "bar" && line[2] == "bar"
+    ? rules.push("rule8")
+    : null; // rule8
+  bars.indexOf(line[0]) >= 0 &&
+  bars.indexOf(line[1]) >= 0 &&
+  bars.indexOf(line[2]) >= 0
+    ? rules.push("rule9")
+    : null; // rule9
+  return rules;
+}
+
+function clearInterface() {
+  document.getElementById("start").disabled = true;
+  document.getElementById("debug").disabled = true;
+  var payTable = document.getElementsByClassName("rule");
+  [].forEach.call(payTable, function(row, index) {
+    row.style.backgroundColor = "white";
+  });
 }

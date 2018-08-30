@@ -19,6 +19,13 @@
             border: 1px solid #aaa;
         }
 
+        .balance #balance {
+            width: 90px;
+            height: 24px;
+            margin-left: 10px;
+            border: none;
+        }
+
         .result {
             height: 26px;
             width: 131px;
@@ -38,14 +45,17 @@
             /* flex-grow: 2; */
             width: 560px;
         }
+
         div.line {
             width: 550px;
             height: 180px;
             border-bottom: 1px solid black;
             position: absolute;
         }
-    
-        table, th, td {
+
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
             padding: 5px;
         }
@@ -62,33 +72,66 @@
 
     <div class="container">
         <div class="reels">
-        <div class="line"></div>
-        <div id="reel1" class="slot"></div>
-        <div id="reel2" class="slot"></div>
-        <div id="reel3" class="slot"></div>
-        <div class="balance"></div>
+            <div class="line"></div>
+            <div id="reel1" class="slot"></div>
+            <div id="reel2" class="slot"></div>
+            <div id="reel3" class="slot"></div>
+            <div class="balance">
+                <input type="text" id="balance" />
+            </div>
 
-        <div id="res_reel1" class="result"></div>
-        <div id="res_reel2" class="result"></div>
-        <div id="res_reel3" class="result"></div>
-        <button onclick="start()" id="start">Start</button>
+            <div id="res_reel1" class="result"></div>
+            <div id="res_reel2" class="result"></div>
+            <div id="res_reel3" class="result"></div>
+            <div>
+                <button onclick="start()" id="start">Start</button>
+                <label><input type="checkbox" id="debug" />Debug</label>
+            </div>
 
-        <div id="" class="result">
-            <select id="reel1_sel">
-                <option value="3bar">3bar</option>
-                <option value="bar">bar</option>
-                <option value="2bar">2bar</option>
-                <option value="seven">seven</option>
-                <option value="cherries">cherries</option>
-            </select>
-            <select id="reel_pos">
-                <option value="top">top</option>
-                <option value="middle">middle</option>
-                <option value="bottom">bottom</option>
-            </select>
+            <div id="" class="result">
+                <select id="reel_dbg1" class="debug" disabled>
+                    <option value="3bar">3bar</option>
+                    <option value="bar">bar</option>
+                    <option value="2bar">2bar</option>
+                    <option value="seven">seven</option>
+                    <option value="cherries">cherries</option>
+                </select>
+                <select id="pos_dbg1" class="debug" disabled>
+                    <option value="top">top</option>
+                    <option value="middle">center</option>
+                    <option value="bottom">bottom</option>
+                </select>
+            </div>
+            <div id="" class="result">
+                <select id="reel_dbg2" class="debug" disabled>
+                    <option value="3bar">3bar</option>
+                    <option value="bar">bar</option>
+                    <option value="2bar">2bar</option>
+                    <option value="seven">seven</option>
+                    <option value="cherries">cherries</option>
+                </select>
+                <select id="pos_dbg2" class="debug" disabled>
+                    <option value="top">top</option>
+                    <option value="middle">center</option>
+                    <option value="bottom">bottom</option>
+                </select>
+            </div>
+            <div id="" class="result">
+                <select id="reel_dbg3" class="debug" disabled>
+                    <option value="3bar">3bar</option>
+                    <option value="bar">bar</option>
+                    <option value="2bar">2bar</option>
+                    <option value="seven">seven</option>
+                    <option value="cherries">cherries</option>
+                </select>
+                <select id="pos_dbg3" class="debug" disabled>
+                    <option value="top">top</option>
+                    <option value="middle">center</option>
+                    <option value="bottom">bottom</option>
+                </select>
+            </div>
         </div>
-    </div>
-        
+
 
         <table>
             <tr>
@@ -96,61 +139,61 @@
                 <th colspan="3">Symbol</th>
                 <th>Reward</th>
             </tr>
-            <tr id="cherry_top">
+            <tr id="rule1" class="rule">
                 <td>top</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>2000 $</td>
             </tr>
-            <tr id="cherry_middle">
+            <tr id="rule2" class="rule">
                 <td>middle</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>1000 $</td>
             </tr>
-            <tr id="cherry_bottom">
+            <tr id="rule3" class="rule">
                 <td>bottom</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>cherry</td>
                 <td>4000 $</td>
             </tr>
-            <tr id="sevens">
+            <tr id="rule4" class="rule">
                 <td>any</td>
                 <td>7</td>
                 <td>7</td>
                 <td>7</td>
                 <td>150 $</td>
             </tr>
-            <tr id="any_any">
+            <tr id="rule5" class="rule">
                 <td>any</td>
                 <td colspan="3">any combination of cherry and 7</td>
                 <td>75 $</td>
             </tr>
-            <tr>
+            <tr id="rule6" class="rule">
                 <td>any</td>
                 <td>3xBAR</td>
                 <td>3xBAR</td>
                 <td>3xBAR</td>
                 <td>50 $</td>
             </tr>
-            <tr>
+            <tr id="rule7" class="rule">
                 <td>any</td>
                 <td>2xBAR</td>
                 <td>2xBAR</td>
                 <td>2xBAR</td>
                 <td>20 $</td>
             </tr>
-            <tr>
+            <tr id="rule8" class="rule">
                 <td>any</td>
                 <td>BAR</td>
                 <td>BAR</td>
                 <td>BAR</td>
                 <td>10 $</td>
             </tr>
-            <tr>
+            <tr id="rule9" class="rule">
                 <td>any</td>
                 <td colspan="3">combination of any BAR</td>
                 <td>50 $</td>
