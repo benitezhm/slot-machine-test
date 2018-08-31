@@ -204,14 +204,6 @@ function finishMovement(el, count, vel) {
         document.getElementById("start").disabled = false;
         document.getElementById("debug").disabled = false;
       }
-
-      var res =
-        slotsPositions[topPosition] +
-        " " +
-        slotsPositions[middlePosition] +
-        " " +
-        slotsPositions[bottomPosition];
-      document.getElementById("res_" + el).innerHTML = res;
     }
   }, 1);
 }
@@ -300,6 +292,6 @@ function clearInterface() {
   document.getElementById("debug").disabled = true;
   var payTable = document.getElementsByClassName("rule");
   [].forEach.call(payTable, function(row, index) {
-    row.style.backgroundColor = "white";
+    row.style.backgroundColor = "";
   });
 }

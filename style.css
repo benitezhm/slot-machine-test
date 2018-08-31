@@ -1,0 +1,202 @@
+body {
+  background-image: url("public/bg.jpg");
+  color: white;
+  font-size: 20px;
+  font-style: italic;
+}
+
+.slot {
+  background: url("public/reel.png") repeat-y;
+  background-color: #e22d84;
+  margin: 0px 10px 0px 10px;
+  border: 10px solid black;
+  border-radius: 20px;
+  height: 360px;
+  width: 141px;
+}
+
+.balance {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+}
+
+label.title {
+  padding: 25px 20px;
+  font-weight: bolder;
+}
+
+input[type="text"],
+input[type="number"] {
+  width: 150px;
+  padding: 12px 10px;
+  margin: 12px 0;
+  box-sizing: border-box;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  text-align: right;
+  font-size: 20px;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+  width: 100%;
+}
+
+select {
+  width: 60px;
+  padding: 6px 10px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+/* custom checkbox */
+/* hiding checkbox */
+input[type="checkbox"] {
+  visibility: hidden;
+}
+
+.checkbox {
+  width: 122px;
+  height: 40px;
+  background: #333;
+  margin: 20px 60px;
+
+  border-radius: 50px;
+  position: relative;
+}
+
+/* label for the on position */
+.checkbox:before {
+  content: "On";
+  position: absolute;
+  top: 12px;
+  left: 13px;
+  height: 2px;
+  color: #26ca28;
+  font-size: 16px;
+}
+
+/* label for the off position */
+.checkbox:after {
+  content: "Off";
+  position: absolute;
+  top: 12px;
+  left: 84px;
+  height: 2px;
+  color: #111;
+  font-size: 16px;
+}
+
+/* the pill to click */
+.checkbox label {
+  display: block;
+  width: 52px;
+  height: 22px;
+  border-radius: 50px;
+
+  transition: all 0.5s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 9px;
+  z-index: 1;
+  left: 12px;
+  background: #ddd;
+}
+
+/* checkbox event for label */
+.checkbox input[type="checkbox"]:checked + label {
+  left: 60px;
+  background: #26ca28;
+}
+
+.result {
+  height: 26px;
+  width: 131px;
+  margin: 10px 21px;
+  padding: 2px 5px;
+}
+
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+
+.content {
+  display: flex;
+  flex-flow: row wrap;
+  padding: 0px 80px;
+  justify-content: space-around;
+}
+
+.content .start {
+  display: flex;
+  width: 100%;
+  padding: 0px;
+  justify-content: center;
+}
+
+.start #start {
+  display: flex;
+  font-size: 20px;
+  font-weight: bold;
+  justify-content: center;
+}
+
+.content div.debug {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 0px;
+}
+
+.debug > label {
+  display: flex;
+  justify-content: center;
+  margin-right: -50px;
+}
+
+div.reels {
+  display: flex;
+  flex-wrap: wrap;
+  width: 580px;
+}
+
+div.line {
+  width: 550px;
+  height: 180px;
+  border-bottom: 1px solid white;
+  position: absolute;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 5px;
+}
+
+table {
+  margin-top: 20px;
+  border-collapse: collapse;
+  font-size: 12px;
+  font-weight: bold;
+}

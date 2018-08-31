@@ -17,9 +17,14 @@ function onRequest(request, response) {
             response.end(data);
         });
     } else if (request.url.match("\.css$")) {
-        var cssPath = path.join(__dirname, 'public', request.url);
+        var cssPath = path.join(__dirname, request.url);
         var fileStream = fs.createReadStream(cssPath, "UTF-8");
         response.writeHead(200, {"Content-Type": "text/css"});
+        fileStream.pipe(response);
+    } else if (request.url.match("\.jpg$")) {
+        var imagePath = path.join(__dirname, request.url);
+        var fileStream = fs.createReadStream(imagePath);
+        response.writeHead(200, {"Content-Type": "image/jpg"});
         fileStream.pipe(response);
     } else if (request.url.match("\.png$")) {
         var imagePath = path.join(__dirname, request.url);
