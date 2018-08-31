@@ -1,5 +1,28 @@
 // initialize
+var modal;
+var span;
 document.addEventListener("DOMContentLoaded", function() {
+  // Get the modal
+  modal = document.getElementById("myModal");
+
+  // hide modal by default
+  modal.style.display = "none";
+
+  // Get the <span> element that closes the modal
+  span = document.getElementsByClassName("close")[0];
+
+  // When the user clicks on <span> (x), close the modal
+  span.onclick = function() {
+    modal.style.display = "none";
+  };
+
+  // When the user clicks anywhere outside of the modal, close it
+  window.onclick = function(event) {
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  };
+
   // enable all options for debug
   document.getElementById("debug").addEventListener("change", function() {
     var dbgList = document.getElementsByClassName("debug");
@@ -76,11 +99,12 @@ function start() {
   inc(vel1);
   inc(vel2);
   inc(vel3);
-  clearInterface();
+  balance = parseInt(document.getElementById("balance").value)
   if (balance <= 0) {
-    alert("You don't have engouth balance!");
+    modal.style.display = "block";
     return;
   }
+  clearInterface();
   balance -= 1;
   document.getElementById("balance").value = balance;
   var reels = document.getElementsByClassName("slot");
