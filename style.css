@@ -126,7 +126,7 @@ input[type="checkbox"] {
   background: #26ca28;
 }
 
-.result {
+.setup-debug {
   height: 26px;
   width: 131px;
   margin: 10px 21px;
@@ -336,4 +336,9 @@ table {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+
+a, a:visited {
+  color: white;
 }

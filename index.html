@@ -8,15 +8,23 @@
 </head>
 
 <body>
+    <!-- github fork -->
+    <a href="https://github.com/benitezhm/slot-machine-test">
+        <img style="position: absolute; top: 0; right: 0; border: 0; width: 149px; height: 149px;" 
+        src="public/fork_me.png" alt="Fork me on GitHub"></a>
 
     <div class="container">
+        <!-- content for balance -->
         <div class="content">
             <div class="balance">
                 <label class="title">Balance:</label> <input type="number" id="balance" value="10" />
             </div>
         </div>
+
+        <!--content for slot machine -->
         <div class="content">
             <div class="reels">
+                <!-- reels -->
                 <div class="line line-b-1"></div>
                 <div class="line line-m-1"></div>
                 <div class="line line-t-1"></div>
@@ -32,8 +40,10 @@
                 <div class="line line-b-4"></div>
                 <div class="line line-m-4"></div>
                 <div class="line line-t-4"></div>
+                <!-- reels -->
 
-                <div class="result">
+                <!-- setup debug -->
+                <div class="setup-debug">
                     <select id="reel_dbg1" class="debug" disabled>
                         <option value="3bar">3bar</option>
                         <option value="bar">bar</option>
@@ -47,7 +57,7 @@
                         <option value="bottom">bottom</option>
                     </select>
                 </div>
-                <div class="result">
+                <div class="setup-debug">
                     <select id="reel_dbg2" class="debug" disabled>
                         <option value="3bar">3bar</option>
                         <option value="bar">bar</option>
@@ -61,7 +71,7 @@
                         <option value="bottom">bottom</option>
                     </select>
                 </div>
-                <div class="result">
+                <div class="setup-debug">
                     <select id="reel_dbg3" class="debug" disabled>
                         <option value="3bar">3bar</option>
                         <option value="bar">bar</option>
@@ -75,6 +85,7 @@
                         <option value="bottom">bottom</option>
                     </select>
                 </div>
+                <!-- setup debug -->
 
                 <div class="content start">
                     <input type="button" onclick="start()" id="start" value="Start" />
