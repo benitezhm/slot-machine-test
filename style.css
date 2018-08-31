@@ -181,10 +181,108 @@ div.reels {
 }
 
 div.line {
-  width: 550px;
-  height: 180px;
-  border-bottom: 1px solid white;
+  border-bottom: 5px solid black;
   position: absolute;
+}
+
+.line-m-1 {
+  width: 20px;
+  height: 180px;
+}
+
+.line-m-2 {
+  width: 40px;
+  height: 180px;
+  margin-left: 161px;
+}
+
+.line-m-3 {
+  width: 40px;
+  height: 180px;
+  margin-left: 342px;
+}
+
+.line-m-4 {
+  width: 20px;
+  height: 180px;
+  margin-left: 524px;
+}
+
+.line-t-1 {
+  width: 20px;
+  height: 80px;
+}
+
+.line-t-2 {
+  width: 40px;
+  height: 80px;
+  margin-left: 161px;
+}
+
+.line-t-3 {
+  width: 40px;
+  height: 80px;
+  margin-left: 342px;
+}
+
+.line-t-4 {
+  width: 20px;
+  height: 80px;
+  margin-left: 524px;
+}
+
+.line-b-1 {
+  width: 20px;
+  height: 300px;
+}
+
+.line-b-2 {
+  width: 40px;
+  height: 300px;
+  margin-left: 161px;
+}
+
+.line-b-3 {
+  width: 40px;
+  height: 300px;
+  margin-left: 342px;
+}
+
+.line-b-4 {
+  width: 20px;
+  height: 300px;
+  margin-left: 524px;
+}
+
+div.line_1_1 {
+  width: 25px;
+  height: 80px;
+  border-bottom: 10px solid white;
+  position: absolute;
+}
+
+div.line_2 {
+  width: 50px;
+  height: 180px;
+  border-bottom: 10px solid white;
+  position: absolute;
+  margin-left: 155px;
+}
+
+div.line_3 {
+  width: 50px;
+  height: 180px;
+  border-bottom: 10px solid white;
+  position: absolute;
+  margin-left: 335px;
+}
+
+div.line_4 {
+  width: 25px;
+  height: 180px;
+  border-bottom: 10px solid white;
+  position: absolute;
+  margin-left: 520px;
 }
 
 table,
@@ -211,8 +309,8 @@ table {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
 }
 
 /* Modal Content/Box */
