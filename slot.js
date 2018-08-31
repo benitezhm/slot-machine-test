@@ -317,5 +317,5 @@ function clearInterface() {
   var payTable = document.getElementsByClassName("rule");
   [].forEach.call(payTable, function(row, index) {
     row.style.backgroundColor = "";
-sty  });
+    });
 }
