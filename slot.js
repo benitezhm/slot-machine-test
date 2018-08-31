@@ -100,7 +100,7 @@ function start() {
   inc(vel2);
   inc(vel3);
   balance = parseInt(document.getElementById("balance").value)
-  if (balance <= 0) {
+  if (isNaN(balance) || balance == "" || balance <= 0) {
     modal.style.display = "block";
     return;
   }
